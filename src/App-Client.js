@@ -6,7 +6,7 @@ import { ZoomMtg } from '@zoomus/websdk';
 
 import { generateSignature } from './signature'
 
-ZoomMtg.setZoomJSLib('https://source.zoom.us/2.5.0/lib', '/av');
+ZoomMtg.setZoomJSLib('https://source.zoom.us/2.7.0/lib', '/av');
 
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareWebSDK();
