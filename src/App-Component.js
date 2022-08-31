@@ -20,7 +20,7 @@ function App() {
 
   const env = require("./env.json");
 
-  //https://intrivo.zoom.us/j/88488852419?pwd=cWhnS1VldER5N01UL01aZEluUmZjZz09
+  //https://intrivo.zoom.us/j/87187651454?pwd=SjBsdTlzUEhXNEs1U0tHc1AzMkl4dz09
   console.log(`key: ${env.ZOOM_SDK_KEY}`);
 
   // This Sample App has been updated to use SDK App type credentials https://marketplace.zoom.us/docs/guides/build/sdk-app
@@ -35,14 +35,10 @@ function App() {
   // Webinars: https://marketplace.zoom.us/docs/sdk/native-sdks/web/component-view/webinars#join-registered
   var registrantToken = "";
 
-  function getSignature(e) {
-    e.preventDefault();
+  function startMeeting() {
+    // const signature = generateSignature(meetingNumber, role);
+    const signature = token;
 
-    const signature = generateSignature(meetingNumber, role);
-    startMeeting(signature);
-  }
-
-  function startMeeting(signature) {
     let meetingSDKElement = document.getElementById("meetingSDKElement");
     const { innerWidth: width, innerHeight: height } = window;
     console.log(`${width}x${height}`);
@@ -75,6 +71,12 @@ function App() {
       },
     });
 
+    client.on("connection-change", (payload) => {
+      console.log("*** connection-change");
+      console.log(payload);
+      window.ReactNativeWebView?.postMessage(`zoom-meeting-${payload.state.toLowerCase()}`);
+    });
+
     client.join({
       sdkKey: sdkKey,
       signature: signature,
@@ -100,6 +102,10 @@ function App() {
     });
   }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    startMeeting();
+ }, false);
+
   return (
     <div className="App">
       <main>
@@ -108,7 +114,7 @@ function App() {
           {/* Zoom Meeting SDK Component View Rendered Here */}
         </div>
 
-        <button onClick={getSignature}>Join Meeting</button>
+        {/* <button onClick={startMeeting}>Join Meeting</button> */}
       </main>
     </div>
   );
