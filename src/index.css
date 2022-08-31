@@ -14,3 +14,13 @@ html, body {
 #zmmtg-root {
   display: none;
 }
+
+#meetingSDKElement {
+  top: 0;
+  left: 0;
+  width: '100%';
+}
+
+div.av-preview-container {
+  height: 'auto';
+}

@@ -1,5 +1,4 @@
 main {
-  width: 70%;
   margin: auto;
   text-align: center;
 }
@@ -22,4 +21,13 @@ main button {
 
 main button:hover {
   background-color: #2681F2;
+}
+
+.zmwebsdk-MuiSvgIcon-root {
+  width: 1.8em !important;
+  height: 1.8em !important;
+}
+
+.zmwebsdk-makeStyles-topbar-23 {
+  display: none !important;
 }

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSearchParams } from "react-router-dom";
 
 import './App.css';
 import { ZoomMtg } from '@zoomus/websdk';
+
+import { generateSignature } from './signature'
 
 ZoomMtg.setZoomJSLib('https://source.zoom.us/2.5.0/lib', '/av');
 
@@ -13,16 +16,26 @@ ZoomMtg.i18n.reload('en-US');
 
 function App() {
 
+  let [searchParams, ] = useSearchParams();
+  let meetingId = searchParams.get('meetingId');
+  let password = searchParams.get('password');
+  console.log(`meetingId: ${meetingId}`);
+  console.log(`password: ${password}`);
+
+  const env = require('./env.json');
+
+  console.log(`key: ${env.ZOOM_SDK_KEY}`);
+
   // setup your signature endpoint here: https://github.com/zoom/meetingsdk-sample-signature-node.js
-  var signatureEndpoint = ''
+  // var signatureEndpoint = 'https://192.168.0.24:4000'
   // This Sample App has been updated to use SDK App type credentials https://marketplace.zoom.us/docs/guides/build/sdk-app
-  var sdkKey = ''
-  var meetingNumber = '123456789'
+  var sdkKey = env.ZOOM_SDK_KEY
+  var meetingNumber = meetingId
   var role = 0
-  var leaveUrl = 'http://localhost:3000'
+  var leaveUrl = 'https://192.168.0.24:3000'
   var userName = 'React'
   var userEmail = ''
-  var passWord = ''
+  var passWord = password
   // pass in the registrant's token if your meeting or webinar requires registration. More info here:
   // Meetings: https://marketplace.zoom.us/docs/sdk/native-sdks/web/client-view/meetings#join-registered
   // Webinars: https://marketplace.zoom.us/docs/sdk/native-sdks/web/client-view/webinars#join-registered
@@ -31,19 +44,22 @@ function App() {
   function getSignature(e) {
     e.preventDefault();
 
-    fetch(signatureEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        meetingNumber: meetingNumber,
-        role: role
-      })
-    }).then(res => res.json())
-    .then(response => {
-      startMeeting(response.signature)
-    }).catch(error => {
-      console.error(error)
-    })
+    const signature = generateSignature(meetingNumber, role);
+    startMeeting(signature);
+
+    // fetch(signatureEndpoint, {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     meetingNumber: meetingNumber,
+    //     role: role
+    //   })
+    // }).then(res => res.json())
+    // .then(response => {
+    //   startMeeting(response.signature)
+    // }).catch(error => {
+    //   console.error(error)
+    // })
   }
 
   function startMeeting(signature) {
@@ -52,6 +68,7 @@ function App() {
     ZoomMtg.init({
       leaveUrl: leaveUrl,
       success: (success) => {
+        console.log('--------------------------')
         console.log(success)
 
         ZoomMtg.join({

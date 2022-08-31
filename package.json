@@ -9,9 +9,11 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@zoomus/websdk": "^2.5.0",
+    "jsrsasign": "^10.5.26",
     "react": "^17.0.1",
     "react-dev-utils": "^11.0.4",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^0.2.4"
   },

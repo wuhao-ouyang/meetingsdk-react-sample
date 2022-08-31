@@ -1,0 +1,39 @@
+server {
+  server_name zoom-react.intrivo.com;
+
+  root   $APP_ROOT/public;
+  index  index.html;
+
+  access_log $APP_ROOT/log/nginx.access.log;
+  error_log $APP_ROOT/log/nginx.error.log;
+
+  location ~ /\. {
+    deny all;
+  }
+
+  location ~* ^.+\.(rb|log)$ {
+    deny all;
+  }
+
+  location ~ ^/(assets|images|javascripts|stylesheets|swfs|system)/ {
+    try_files $uri 404;
+
+    access_log off;
+    gzip_static on; # to serve pre-gzipped version
+
+    expires max;
+    add_header Cache-Control public;
+
+    # Some browsers still send conditional-GET requests if there's a
+    # Last-Modified header or an ETag header even if they haven't
+    # reached the expiry date sent in the Expires header.
+    add_header Last-Modified "";
+    add_header ETag "";
+    break;
+  }
+
+  location / {
+    try_files $uri /index.html;
+    index /index.html;
+  }
+}
