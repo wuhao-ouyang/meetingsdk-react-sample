@@ -1,0 +1,17 @@
+image:
+  tag: latest
+
+host: 
+
+fullnameOverride: meetingsdk-react-sample
+nameOverride: meetingsdk-react-sample
+
+replicaCount: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+
+ingress:
+  enabled: false
