@@ -18,7 +18,10 @@ function App() {
   console.log(`token: ${token}`);
   console.log(`password: ${password}`);
 
-  const env = require("./env.json");
+  // const env = require('./env.json')
+  const env = {
+    ZOOM_SDK_KEY: "process.env.ZOOM_SDK_KEY",
+  };
 
   //https://intrivo.zoom.us/j/87187651454?pwd=SjBsdTlzUEhXNEs1U0tHc1AzMkl4dz09
   console.log(`key: ${env.ZOOM_SDK_KEY}`);

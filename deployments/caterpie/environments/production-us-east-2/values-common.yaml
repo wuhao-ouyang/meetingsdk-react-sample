@@ -3,7 +3,7 @@ image:
 
 testConnection: true
 
-host: 
+host:
 
 ingress:
   enabled: true
@@ -17,13 +17,13 @@ ingress:
     # kubernetes.io/tls-acme: "true"
 
   hosts:
-    - host: zoom.intrivo.com
+    - host:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: meetingsdk-react-sample
+              name: caterpie
               port:
                 number: 80
   tls: []

@@ -1,5 +1,9 @@
 const KJUR = require('jsrsasign')
-const env = require('./env.json')
+
+// const env = require('./env.json')
+const env = {
+  ZOOM_SDK_KEY: "process.env.ZOOM_SDK_KEY",
+};
 
 export function generateSignature(meetingNumber, role) {
   const iat = Math.round(new Date().getTime() / 1000) - 30;

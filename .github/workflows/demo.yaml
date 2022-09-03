@@ -30,7 +30,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: meetingsdk-react-sample
+          ECR_REPOSITORY: caterpie
           IMAGE_TAG: ${{ github.sha }}
           ENVIRONMENT: demo
           NODE_ENV: demo
@@ -43,8 +43,8 @@ jobs:
         env:
           IMAGE_URL: ${{ steps.build-image.outputs.image }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: meetingsdk-react-sample
+          ECR_REPOSITORY: caterpie
           IMAGE_TAG: ${{ github.sha }}
         run: |
           echo "$KUBE_CONFIG_DATA" | base64 -d > ~/.kube/config
-          cd ./deployments/meetingsdk-react-sample && make upgrade-demo && cd -
+          cd ./deployments/caterpie && make upgrade-demo && cd -

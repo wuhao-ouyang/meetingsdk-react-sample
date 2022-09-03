@@ -22,7 +22,10 @@ function App() {
   console.log(`meetingId: ${meetingId}`);
   console.log(`password: ${password}`);
 
-  const env = require('./env.json');
+  // const env = require('./env.json')
+  const env = {
+    ZOOM_SDK_KEY: "process.env.ZOOM_SDK_KEY",
+  };
 
   console.log(`key: ${env.ZOOM_SDK_KEY}`);
 

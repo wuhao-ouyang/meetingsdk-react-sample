@@ -1,10 +1,14 @@
 image:
   tag: latest
 
-host: 
+host:
 
-fullnameOverride: meetingsdk-react-sample
-nameOverride: meetingsdk-react-sample
+replicaCount: 2
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
 
 ingress:
   enabled: true
@@ -18,20 +22,13 @@ ingress:
     # kubernetes.io/tls-acme: "true"
 
   hosts:
-    - host: 
+    - host: zoom-dev.intrivo.com
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: meetingsdk-react-sample
+              name: caterpie
               port:
                 number: 80
   tls: []
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 1
-
-replicaCount: 1

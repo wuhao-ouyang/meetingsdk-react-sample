@@ -1,7 +1,7 @@
 image:
   tag: latest
 
-host: 
+host:
 
 ingress:
   enabled: true
@@ -21,7 +21,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: meetingsdk-react-sample
+              name: caterpie
               port:
                 number: 80
   tls: []

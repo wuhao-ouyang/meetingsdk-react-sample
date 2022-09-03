@@ -1,9 +1,9 @@
 on:
   push:
     branches:
-      - qa-canary
+      - main
 
-name: Deploy QA Canary
+name: Deploy QA
 
 jobs:
   build:
@@ -41,7 +41,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: meetingsdk-react-sample
+          ECR_REPOSITORY: caterpie
           IMAGE_TAG: ${{ github.sha }}
           ENVIRONMENT: qa
           NODE_ENV: qa
@@ -79,7 +79,7 @@ jobs:
         env:
           IMAGE_URL: ${{ steps.build-image.outputs.image }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: meetingsdk-react-sample
+          ECR_REPOSITORY: caterpie
           IMAGE_TAG: ${{ github.sha }}
           ENVIRONMENT: qa-us-east-1
         run: |
@@ -88,4 +88,4 @@ jobs:
           aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
           echo $IMAGE_URL
           echo $ECR_REGISTRY
-          cd ./deployments/meetingsdk-react-sample && make upgrade-canary && cd -
+          cd ./deployments/caterpie && make upgrade && cd -

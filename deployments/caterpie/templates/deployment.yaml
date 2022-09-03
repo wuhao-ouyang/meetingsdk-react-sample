@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "meetingsdk-react-sample.fullname" . }}
+  name: {{ include "caterpie.fullname" . }}
   labels:
-    {{- include "meetingsdk-react-sample.labels" . | nindent 4 }}
+    {{- include "caterpie.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "meetingsdk-react-sample.selectorLabels" . | nindent 6 }}
+      {{- include "caterpie.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "meetingsdk-react-sample.selectorLabels" . | nindent 8 }}
+        {{- include "caterpie.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "meetingsdk-react-sample.serviceAccountName" . }}
+      serviceAccountName: {{ include "caterpie.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

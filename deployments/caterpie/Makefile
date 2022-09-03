@@ -1,7 +1,7 @@
 HELM_BINARY?=helm
 KUBECONFIG?=~/.kube/config
 
-UNIT_NAME?=meetingsdk-react-sample
+UNIT_NAME?=caterpie
 
 ENVIRONMENT?=dev-us-east-1
 CANARY_VALUES_FILE=./environments/${ENVIRONMENT}/canary-values-common.yaml
@@ -54,40 +54,40 @@ delete:
 	kubectl delete -f ${TEMPLATE_OUTPUT} -n app
 
 install:
-	 ${HELM_BINARY} install meetingsdk-react-sample ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} install caterpie ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE}
 
 uninstall:
-	 ${HELM_BINARY} uninstall meetingsdk-react-sample -n app
+	 ${HELM_BINARY} uninstall caterpie -n app
 
 upgrade:
-	 ${HELM_BINARY} upgrade --install meetingsdk-react-sample ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} upgrade --install caterpie ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set image.tag=${IMAGE_TAG}
 
 upgrade-canary:
-	 ${HELM_BINARY} upgrade --install meetingsdk-react-sample-canary ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} upgrade --install caterpie-canary ../caterpie -n app \
 	 --values ${CANARY_VALUES_FILE} \
 	 --set image.tag=${IMAGE_TAG}
 
 install-demo:
-	 ${HELM_BINARY} install meetingsdk-react-sample-demo ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} install caterpie-demo ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set host=-demo.intrivo.com \
 	 --set image.tag=${IMAGE_TAG}
 
 uninstall-demo:
-	 ${HELM_BINARY} uninstall meetingsdk-react-sample-demo -n app
+	 ${HELM_BINARY} uninstall caterpie-demo -n app
 
 upgrade-demo:
-	 ${HELM_BINARY} upgrade --install meetingsdk-react-sample-demo ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} upgrade --install caterpie-demo ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set host=-demo.intrivo.com \
 	 --set image.tag=${IMAGE_TAG}
 
 
 install-staging:
-	 ${HELM_BINARY} install meetingsdk-react-sample-staging ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} install caterpie-staging ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set host=-staging.intrivo.com \
 	 --set 'ingress.hosts[0].host=-staging.intrivo.com' \
@@ -95,7 +95,7 @@ install-staging:
 
 
 template-staging:
-	 ${HELM_BINARY} template meetingsdk-react-sample-staging ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} template caterpie-staging ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set host=-staging.intrivo.com \
 	 --set 'ingress.hosts[0].host=-staging.intrivo.com' \
@@ -103,10 +103,10 @@ template-staging:
 
 
 uninstall-staging:
-	 ${HELM_BINARY} uninstall meetingsdk-react-sample-staging -n app
+	 ${HELM_BINARY} uninstall caterpie-staging -n app
 
 upgrade-staging:
-	 ${HELM_BINARY} upgrade --install meetingsdk-react-sample-staging ../meetingsdk-react-sample -n app \
+	 ${HELM_BINARY} upgrade --install caterpie-staging ../caterpie -n app \
 	 --values ${COMMON_VALUES_FILE} \
 	 --set host=-staging.intrivo.com \
 	 --set 'ingress.hosts[0].host=-staging.intrivo.com' \

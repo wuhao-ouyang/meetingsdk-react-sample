@@ -1,10 +1,10 @@
 image:
   tag: latest
 
-host: 
+host:
 
-fullnameOverride: meetingsdk-react-sample
-nameOverride: meetingsdk-react-sample
+fullnameOverride: caterpie
+nameOverride: caterpie
 
 replicaCount: 1
 

@@ -1,5 +1,5 @@
 AWS_BASE_URL=637659487626.dkr.ecr.us-east-1.amazonaws.com
-ECR_REPOSITORY?=meetingsdk-react-sample
+ECR_REPOSITORY?=caterpie
 APP_URL=${AWS_BASE_URL}/${ECR_REPOSITORY}
 IMAGE_TAG?=latest
 ENVIRONMENT?=dev
